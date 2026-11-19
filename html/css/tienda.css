@@ -1,0 +1,241 @@
+body {
+    background-color: #2b211b;
+    color: #efe6d8;
+    font-family: "Karla", sans-serif;
+    font-size: 17px;
+}
+
+h1, h2, h3, .navbar-brand {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 800;
+}
+
+a {
+    color: #f2c230;
+}
+
+.barra {
+    background-color: #1f1813;
+    border-bottom: 1px solid #4a372a;
+}
+
+.barra .navbar-brand {
+    color: #efe6d8;
+    font-size: 26px;
+}
+
+.barra .navbar-brand i {
+    color: #f2c230;
+}
+
+.barra .nav-link {
+    color: #b9ab97;
+}
+
+.barra .nav-link:hover,
+.barra .nav-link.active {
+    color: #efe6d8;
+}
+
+.barra .dropdown-menu {
+    background-color: #1f1813;
+    border: 1px solid #4a372a;
+}
+
+.barra .dropdown-item {
+    color: #efe6d8;
+}
+
+.barra .dropdown-item:hover {
+    background-color: #3a2c22;
+    color: #f2c230;
+}
+
+.btn-tienda {
+    border: 2px solid #efe6d8;
+    color: #efe6d8;
+    font-weight: 700;
+}
+
+.btn-tienda:hover {
+    background-color: #f2c230;
+    border-color: #f2c230;
+    color: #2b211b;
+}
+
+.btn-precio {
+    background-color: #f2c230;
+    border: 2px solid #f2c230;
+    color: #2b211b;
+    font-weight: 700;
+}
+
+.btn-precio:hover {
+    background-color: #efe6d8;
+    border-color: #efe6d8;
+    color: #2b211b;
+}
+
+.portada-inicio {
+    padding-top: 70px;
+    padding-bottom: 0px;
+    overflow: hidden;
+}
+
+.portada-inicio h1 {
+    font-size: 80px;
+    line-height: 0.95;
+    margin-bottom: 20px;
+}
+
+.portada-inicio p {
+    color: #b9ab97;
+    font-size: 20px;
+    max-width: 440px;
+}
+
+.escaparate {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    margin-left: 20px;
+}
+
+.escaparate .vinilo {
+    left: 150px;
+}
+
+.repisa {
+    height: 18px;
+    background-color: #6b4a33;
+    border-bottom: 8px solid #4a3324;
+}
+
+.encabezado {
+    padding-top: 50px;
+    padding-bottom: 30px;
+    border-bottom: 18px solid #6b4a33;
+}
+
+.encabezado h1 {
+    font-size: 64px;
+    margin-bottom: 4px;
+}
+
+.encabezado p {
+    color: #b9ab97;
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.titulo-seccion {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.disco {
+    margin-bottom: 40px;
+}
+
+.funda {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 14px;
+}
+
+.disco:hover .funda {
+    z-index: 10;
+}
+
+.funda .portada {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    box-shadow: 4px 4px 0px #1a1410;
+}
+
+.vinilo {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    width: 94%;
+    z-index: 1;
+    transition: transform 0.5s;
+}
+
+.disco:hover .vinilo {
+    transform: translateX(48%) rotate(120deg);
+}
+
+.precio {
+    position: absolute;
+    z-index: 3;
+    top: -12px;
+    right: -10px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #f2c230;
+    color: #2b211b;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-10deg);
+}
+
+.disco h3 {
+    font-size: 24px;
+    margin-bottom: 0px;
+}
+
+.disco .artista {
+    color: #b9ab97;
+    margin-bottom: 2px;
+}
+
+.disco .formato {
+    color: #8c7d6a;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.vacio {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    max-width: 520px;
+}
+
+.vacio p {
+    color: #b9ab97;
+    font-size: 20px;
+}
+
+.pie {
+    background-color: #1f1813;
+    border-top: 1px solid #4a372a;
+    color: #8c7d6a;
+}
+
+@media (max-width: 991px) {
+    .portada-inicio h1 {
+        font-size: 56px;
+    }
+
+    .escaparate {
+        width: 220px;
+        height: 220px;
+        margin-top: 30px;
+    }
+
+    .escaparate .vinilo {
+        left: 90px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vinilo {
+        transition: none;
+    }
+}

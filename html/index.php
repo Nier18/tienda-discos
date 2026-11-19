@@ -1,29 +1,56 @@
 <?php
 $pagina = "inicio";
-$titulo = "Tienda de Discos";
-$subtitulo = "Vinilos, CDs y casetes";
+$titulo = "Inicio";
 include "includes/encabezado.php";
+
+$discos = array(
+    array("Mareas lentas", "Los Faros", "Vinilo", 459),
+    array("Sol de mediodía", "Cometa Azul", "Vinilo", 389),
+    array("Confeti", "Las Bicicletas", "CD", 249),
+    array("Señal débil", "Radio Norte", "Vinilo", 529),
+    array("Volcán", "Tierra Fría", "Casete", 199),
+    array("Tablero", "Club Ajedrez", "Vinilo", 419),
+    array("Después de las 3", "Neón Bajo", "CD", 279),
+    array("Cuarto rojo", "Mónica Vela", "Vinilo", 489)
+);
 ?>
+        <section class="portada-inicio">
+            <div class="container px-4 px-lg-5">
+                <div class="row align-items-end">
+                    <div class="col-lg-7 pb-5">
+                        <h1>Discos para escuchar de principio a fin</h1>
+                        <p>Vinilos, CDs y casetes, nuevos y usados.</p>
+                        <a class="btn btn-precio btn-lg mt-3 me-2" href="catalogo.php">Ver catálogo</a>
+                        <a class="btn btn-tienda btn-lg mt-3" href="generos.php">Buscar por género</a>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="escaparate funda mb-0">
+                            <img class="vinilo" src="img/vinilo.png" alt="" />
+                            <img class="portada" src="img/portadas/1.jpg" alt="Portada de Mareas lentas" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="repisa"></div>
+        </section>
         <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="fw-bolder mb-4">Novedades</h2>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="container px-4 px-lg-5 mt-4">
+                <h2 class="titulo-seccion">Recién llegados</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
 <?php
-for ($i = 1; $i <= 8; $i++) {
+for ($i = 0; $i < count($discos); $i++) {
 ?>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="https://dummyimage.com/450x450/dee2e6/6c757d.jpg&text=Disco+<?php echo $i; ?>" alt="Disco <?php echo $i; ?>" />
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <h5 class="fw-bolder">Álbum <?php echo $i; ?></h5>
-                                    <p class="text-muted mb-1">Artista</p>
-                                    $0.00
-                                </div>
+                    <div class="col">
+                        <div class="disco">
+                            <div class="funda">
+                                <img class="vinilo" src="img/vinilo.png" alt="" />
+                                <img class="portada" src="img/portadas/<?php echo $i + 1; ?>.jpg" alt="Portada de <?php echo $discos[$i][0]; ?>" />
+                                <span class="precio">$<?php echo $discos[$i][3]; ?></span>
                             </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="catalogo.php">Ver disco</a></div>
-                            </div>
+                            <h3><?php echo $discos[$i][0]; ?></h3>
+                            <p class="artista"><?php echo $discos[$i][1]; ?></p>
+                            <p class="formato"><?php echo $discos[$i][2]; ?></p>
+                            <a class="btn btn-tienda btn-sm" href="catalogo.php">Ver disco</a>
                         </div>
                     </div>
 <?php
