@@ -28,12 +28,19 @@ CREATE TABLE albumes (
     artista_id INT NOT NULL,
     genero_principal_id INT NOT NULL,
     anio INT NOT NULL,
-    formato ENUM('Vinilo', 'CD', 'Casete') NOT NULL,
-    precio DECIMAL(8,2) NOT NULL,
-    existencias INT NOT NULL DEFAULT 0,
     portada MEDIUMBLOB,
     FOREIGN KEY (artista_id) REFERENCES artistas(id),
     FOREIGN KEY (genero_principal_id) REFERENCES generos(id)
+);
+
+CREATE TABLE ediciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    album_id INT NOT NULL,
+    formato ENUM('Vinilo', 'CD', 'Casete') NOT NULL,
+    precio DECIMAL(8,2) NOT NULL,
+    existencias INT NOT NULL DEFAULT 0,
+    UNIQUE (album_id, formato),
+    FOREIGN KEY (album_id) REFERENCES albumes(id) ON DELETE CASCADE
 );
 
 CREATE TABLE generos_secundarios (
@@ -50,6 +57,7 @@ CREATE TABLE canciones (
     numero INT NOT NULL,
     titulo VARCHAR(150) NOT NULL,
     duracion TIME,
+    UNIQUE (album_id, numero),
     FOREIGN KEY (album_id) REFERENCES albumes(id) ON DELETE CASCADE
 );
 
@@ -65,20 +73,22 @@ CREATE TABLE pedidos (
 CREATE TABLE detalle_pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pedido_id INT NOT NULL,
-    album_id INT NOT NULL,
+    edicion_id INT NOT NULL,
     cantidad INT NOT NULL,
     precio_unitario DECIMAL(8,2) NOT NULL,
+    UNIQUE (pedido_id, edicion_id),
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE,
-    FOREIGN KEY (album_id) REFERENCES albumes(id)
+    FOREIGN KEY (edicion_id) REFERENCES ediciones(id)
 );
 
 CREATE TABLE resenas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
     album_id INT NOT NULL,
-    calificacion INT NOT NULL,
+    calificacion INT NOT NULL CHECK (calificacion BETWEEN 1 AND 5),
     comentario TEXT,
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (usuario_id, album_id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (album_id) REFERENCES albumes(id) ON DELETE CASCADE
 );
@@ -92,12 +102,19 @@ INSERT INTO artistas (nombre, pais, anio_inicio) VALUES
 ('Godspeed You! Black Emperor', 'Canadá', 1994),
 ('Aphex Twin', 'Reino Unido', 1985);
 
-INSERT INTO albumes (titulo, artista_id, genero_principal_id, anio, formato, precio, existencias) VALUES
-('Kid A', 1, 1, 2000, 'Vinilo', 749.00, 5),
-('OK Computer', 1, 1, 1997, 'CD', 299.00, 10),
-('Gorillaz', 2, 4, 2001, 'Vinilo', 699.00, 3),
-('Lift Your Skinny Fists Like Antennas to Heaven', 3, 3, 2000, 'Vinilo', 899.00, 2),
-('Selected Ambient Works 85-92', 4, 2, 1992, 'Casete', 249.00, 4);
+INSERT INTO albumes (titulo, artista_id, genero_principal_id, anio) VALUES
+('Kid A', 1, 1, 2000),
+('OK Computer', 1, 1, 1997),
+('Gorillaz', 2, 4, 2001),
+('Lift Your Skinny Fists Like Antennas to Heaven', 3, 3, 2000),
+('Selected Ambient Works 85-92', 4, 2, 1992);
+
+INSERT INTO ediciones (album_id, formato, precio, existencias) VALUES
+(1, 'Vinilo', 749.00, 5),
+(2, 'CD', 299.00, 10),
+(3, 'Vinilo', 699.00, 3),
+(4, 'Vinilo', 899.00, 2),
+(5, 'Casete', 249.00, 4);
 
 INSERT INTO generos_secundarios (album_id, genero_id) VALUES
 (1, 2),
@@ -117,14 +134,14 @@ INSERT INTO canciones (album_id, numero, titulo, duracion) VALUES
 (5, 1, 'Xtal', '00:04:54');
 
 INSERT INTO usuarios (nombre, correo, contrasena, direccion) VALUES
-('Ana López', 'ana@correo.com', '123456', 'Av. Universidad 100, CDMX'),
-('Luis Pérez', 'luis@correo.com', '123456', 'Calle Reforma 25, Edomex');
+('Ana López', 'ana@correo.com', '$2y$10$V2JQTaGdtFKnt6Xd7fMSr.6JcQC5daY8G8xQxgRfOIQHkaTVpqMaW', 'Av. Universidad 100, CDMX'),
+('Luis Pérez', 'luis@correo.com', '$2y$10$CNW9H5uUfYBvPjCMpnuXTOmMWTqxV3dXNuedCg3zeghPbW41.MyGu', 'Calle Reforma 25, Edomex');
 
 INSERT INTO pedidos (usuario_id, total, estado) VALUES
 (1, 1048.00, 'Enviado'),
 (2, 899.00, 'Pendiente');
 
-INSERT INTO detalle_pedido (pedido_id, album_id, cantidad, precio_unitario) VALUES
+INSERT INTO detalle_pedido (pedido_id, edicion_id, cantidad, precio_unitario) VALUES
 (1, 1, 1, 749.00),
 (1, 2, 1, 299.00),
 (2, 4, 1, 899.00);
