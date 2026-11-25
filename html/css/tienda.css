@@ -250,6 +250,27 @@ a {
     color: #efe6d8;
 }
 
+.portada-disco {
+    width: 100%;
+    box-shadow: 6px 6px 0px #1a1410;
+}
+
+.tabla-tienda th,
+.tabla-tienda td {
+    background-color: transparent;
+    color: #efe6d8;
+    border-color: #4a372a;
+}
+
+.tabla-tienda th {
+    color: #f2c230;
+}
+
+.tabla-tienda .numero {
+    color: #8c7d6a;
+    width: 40px;
+}
+
 .pie {
     background-color: #1f1813;
     border-top: 1px solid #4a372a;
