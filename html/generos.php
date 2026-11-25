@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pagina = "generos";
 $titulo = "Géneros";
 $subtitulo = "Rock, jazz, electrónica y más";

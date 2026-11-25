@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pagina = "carrito";
 $titulo = "Carrito";
 $subtitulo = "Los discos que vas a comprar";

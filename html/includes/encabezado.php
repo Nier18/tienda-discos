@@ -29,10 +29,29 @@
                         <li class="nav-item"><a class="nav-link <?php if ($pagina == "acerca") echo "active"; ?>" href="acerca.php">Acerca de</a></li>
                     </ul>
                     <div class="d-flex">
+<?php
+if (isset($_SESSION["usuario_id"])) {
+?>
+                        <div class="dropdown me-2">
+                            <a class="btn btn-tienda dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi-person-fill me-1"></i>
+                                <?php echo htmlspecialchars($_SESSION["nombre"]); ?>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="cuenta.php">Mi cuenta</a></li>
+                                <li><a class="dropdown-item" href="salir.php">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+<?php
+} else {
+?>
                         <a class="btn btn-tienda me-2" href="cuenta.php">
                             <i class="bi-person-fill me-1"></i>
                             Iniciar sesión
                         </a>
+<?php
+}
+?>
                         <a class="btn btn-tienda" href="carrito.php">
                             <i class="bi-cart-fill me-1"></i>
                             Carrito

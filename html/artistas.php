@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pagina = "artistas";
 $titulo = "Artistas";
 $subtitulo = "Busca discos por artista";

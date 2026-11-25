@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pagina = "cuenta";
 $titulo = "Iniciar sesión";
 $subtitulo = "Entra a tu cuenta o crea una";

@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pagina = "catalogo";
 $titulo = "Catálogo";
 $subtitulo = "Todos los discos de la tienda";

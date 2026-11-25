@@ -1,4 +1,5 @@
 <?php
+session_start();
 $pagina = "acerca";
 $titulo = "Acerca de";
 $subtitulo = "Quiénes somos";
