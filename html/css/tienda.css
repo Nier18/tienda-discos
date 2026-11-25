@@ -212,6 +212,44 @@ a {
     font-size: 20px;
 }
 
+.caja-form {
+    background-color: #1f1813;
+    border: 1px solid #4a372a;
+    padding: 30px;
+    max-width: 480px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.caja-form label {
+    color: #b9ab97;
+}
+
+.caja-form .form-control {
+    background-color: #2b211b;
+    border: 1px solid #6b4a33;
+    color: #efe6d8;
+}
+
+.caja-form .form-control:focus {
+    background-color: #2b211b;
+    border-color: #f2c230;
+    color: #efe6d8;
+    box-shadow: none;
+}
+
+.aviso {
+    background-color: #f2c230;
+    color: #2b211b;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+}
+
+.aviso.error {
+    background-color: #8a2c1f;
+    color: #efe6d8;
+}
+
 .pie {
     background-color: #1f1813;
     border-top: 1px solid #4a372a;
