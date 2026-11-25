@@ -4,16 +4,23 @@ $pagina = "inicio";
 $titulo = "Inicio";
 include "includes/encabezado.php";
 
-$discos = array(
-    array("Mareas lentas", "Los Faros", "Vinilo", 459),
-    array("Sol de mediodía", "Cometa Azul", "Vinilo", 389),
-    array("Confeti", "Las Bicicletas", "CD", 249),
-    array("Señal débil", "Radio Norte", "Vinilo", 529),
-    array("Volcán", "Tierra Fría", "Casete", 199),
-    array("Tablero", "Club Ajedrez", "Vinilo", 419),
-    array("Después de las 3", "Neón Bajo", "CD", 279),
-    array("Cuarto rojo", "Mónica Vela", "Vinilo", 489)
-);
+include "includes/conexion.php";
+
+$sql = "SELECT a.id, a.titulo, a.portada, ar.nombre AS artista,
+        MIN(e.precio) AS precio,
+        GROUP_CONCAT(e.formato ORDER BY e.formato SEPARATOR ' · ') AS formatos
+    FROM albumes a
+    JOIN artistas ar ON ar.id = a.artista_id
+    JOIN ediciones e ON e.album_id = a.id
+    GROUP BY a.id
+    ORDER BY a.id
+    LIMIT 8;";
+$resultado = mysqli_query($con, $sql);
+$discos = array();
+while ($row = mysqli_fetch_array($resultado)) {
+    $discos[] = $row;
+}
+mysqli_close($con);
 ?>
         <section class="portada-inicio">
             <div class="container px-4 px-lg-5">
@@ -27,7 +34,7 @@ $discos = array(
                     <div class="col-lg-5">
                         <div class="escaparate funda mb-0">
                             <img class="vinilo" src="img/vinilo.png" alt="" />
-                            <img class="portada" src="img/portadas/1.jpg" alt="Portada de Mareas lentas" />
+                            <img class="portada" src="img/discos/<?php echo $discos[0]["portada"]; ?>" alt="Portada de <?php echo htmlspecialchars($discos[0]["titulo"]); ?>" />
                         </div>
                     </div>
                 </div>
@@ -45,13 +52,13 @@ for ($i = 0; $i < count($discos); $i++) {
                         <div class="disco">
                             <div class="funda">
                                 <img class="vinilo" src="img/vinilo.png" alt="" />
-                                <img class="portada" src="img/portadas/<?php echo $i + 1; ?>.jpg" alt="Portada de <?php echo $discos[$i][0]; ?>" />
-                                <span class="precio">$<?php echo $discos[$i][3]; ?></span>
+                                <img class="portada" src="img/discos/<?php echo $discos[$i]["portada"]; ?>" alt="Portada de <?php echo htmlspecialchars($discos[$i]["titulo"]); ?>" />
+                                <span class="precio">$<?php echo number_format($discos[$i]["precio"], 0); ?></span>
                             </div>
-                            <h3><?php echo $discos[$i][0]; ?></h3>
-                            <p class="artista"><?php echo $discos[$i][1]; ?></p>
-                            <p class="formato"><?php echo $discos[$i][2]; ?></p>
-                            <a class="btn btn-tienda btn-sm" href="catalogo.php">Ver disco</a>
+                            <h3><?php echo htmlspecialchars($discos[$i]["titulo"]); ?></h3>
+                            <p class="artista"><?php echo htmlspecialchars($discos[$i]["artista"]); ?></p>
+                            <p class="formato"><?php echo $discos[$i]["formatos"]; ?></p>
+                            <a class="btn btn-tienda btn-sm" href="disco.php?id=<?php echo $discos[$i]["id"]; ?>">Ver disco</a>
                         </div>
                     </div>
 <?php
